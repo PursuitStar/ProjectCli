@@ -1,0 +1,123 @@
+/* --- v-transition 过渡样式 --- */
+
+// 右滑进入
+.slide-in-enter {
+    transform: translateX(100%);
+}
+
+.slide-in-leave-to {
+    transform: translateX(-100%);
+}
+
+.slide-in-leave-active,
+.slide-in-enter-active {
+    transition: all 0.5s ease;
+}
+
+
+
+// 左滑进入
+.slide-out-enter {
+    transform: translateX(-100%);
+}
+
+.slide-out-leave-to {
+    transform: translateX(100%);
+}
+
+.slide-out-leave-active,
+.slide-out-enter-active {
+    transition: all 0.5s ease;
+}
+
+
+
+// 模态框 - 中间出现
+.modal-center-enter {
+    transform: scale(0, 0);
+}
+
+.modal-center-leave-to {
+    transform: scale(0, 0);
+}
+
+.modal-center-leave-active,
+.modal-center-enter-active {
+    transition: all 0.4s ease;
+}
+
+
+// 模态框 - 底部出现
+.modal-bottom-enter {
+    transform: translateY(100%);
+}
+
+.modal-bottom-leave-to {
+    transform: translateY(100%);
+}
+
+.modal-bottom-leave-active,
+.modal-bottom-enter-active {
+    transition: all 0.4s ease;
+}
+
+
+
+// 模态框 - 上部出现
+.modal-top-enter {
+    transform: translateY(-100%);
+}
+
+.modal-top-leave-to {
+    transform: translateY(-100%);
+}
+
+.modal-top-leave-active,
+.modal-top-enter-active {
+    transition: all 0.4s ease;
+}
+
+
+// 模态框 - 左侧出现
+.modal-left-enter {
+    transform: translateX(-100%);
+}
+
+.modal-left-leave-to {
+    transform: translateX(-100%);
+}
+
+.modal-left-leave-active,
+.modal-left-enter-active {
+    transition: all 0.4s ease;
+}
+
+
+// 模态框 - 右侧出现
+.modal-right-enter {
+    transform: translateX(100%);
+}
+
+.modal-right-leave-to {
+    transform: translateX(100%);
+}
+
+.modal-right-leave-active,
+.modal-right-enter-active {
+    transition: all 0.4s ease;
+}
+
+
+// 渐变
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-leave-to {
+    opacity: 0;
+}
+
+.fade-leave-active,
+.fade-enter-active {
+    transition: all 0.4s ease;
+}
