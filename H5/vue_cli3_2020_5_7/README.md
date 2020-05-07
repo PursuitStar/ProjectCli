@@ -23,6 +23,10 @@ yarn lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+### 项目可视化
+```
+vue ui
+```
 
 ### 项目结构
 ```
