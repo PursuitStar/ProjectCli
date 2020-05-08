@@ -225,8 +225,6 @@ div {
     .my_canvas {
       width: 100%;
       height: 568px;
-      display: flex;
-      flex-direction: column;
     }
   }
 }

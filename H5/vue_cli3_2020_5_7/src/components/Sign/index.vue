@@ -80,14 +80,16 @@ export default {
     }
   },
   mounted() {
-    // canvas相关
-    let canvas = this.$refs.canvasF;
+    setTimeout(() => {
+      // canvas相关
+      let canvas = this.$refs.canvasF;
 
-    canvas.height = this.$refs.canvasBox.offsetHeight;
-    canvas.width = this.$refs.canvasBox.offsetWidth;
-    this.canvasTxt = canvas.getContext("2d");
-    canvas.toBlob(blob => {
-      this.blob.before = blob.size;
+      canvas.height = this.$refs.canvasBox.offsetHeight;
+      canvas.width = this.$refs.canvasBox.offsetWidth;
+      this.canvasTxt = canvas.getContext("2d");
+      canvas.toBlob(blob => {
+        this.blob.before = blob.size;
+      });
     });
   },
   methods: {
@@ -271,7 +273,7 @@ div {
 .components_sign_item {
   width: 100%;
   position: relative;
-  flex: 1;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background: #ffffff;
