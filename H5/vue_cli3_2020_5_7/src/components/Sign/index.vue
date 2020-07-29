@@ -115,6 +115,7 @@ export default {
     mouseDown(ev) {
       let dom = this.$refs.canvasF;
       let marginTop = dom.getBoundingClientRect().top;
+      let marginLeft = dom.getBoundingClientRect().left || 0;
 
       ev = ev || event;
       if (ev.cancelable) {
@@ -122,8 +123,8 @@ export default {
       }
       // console.log(ev);
       let obj = {
-        x: ev.clientX,
-        y: ev.clientY - marginTop
+        x: ev.clientX - marginLeft,
+        y: ev.clientY - marginTop,
       };
       // console.log(obj);
       this.startX = obj.x;
@@ -140,6 +141,7 @@ export default {
     touchStart(ev) {
       let dom = this.$refs.canvasF;
       let marginTop = dom.getBoundingClientRect().top;
+      let marginLeft = dom.getBoundingClientRect().left || 0;
 
       ev = ev || event;
       if (ev.cancelable) {
@@ -148,8 +150,8 @@ export default {
 
       if (ev.touches.length == 1) {
         let obj = {
-          x: ev.targetTouches[0].clientX,
-          y: ev.targetTouches[0].clientY - marginTop
+          x: ev.targetTouches[0].clientX - marginLeft,
+          y: ev.targetTouches[0].clientY - marginTop,
         };
         this.startX = obj.x;
         this.startY = obj.y;
@@ -165,6 +167,7 @@ export default {
     mouseMove(ev) {
       let dom = this.$refs.canvasF;
       let marginTop = dom.getBoundingClientRect().top;
+      let marginLeft = dom.getBoundingClientRect().left || 0;
 
       ev = ev || event;
       if (ev.cancelable) {
@@ -173,8 +176,8 @@ export default {
 
       if (this.isDown) {
         let obj = {
-          x: ev.clientX,
-          y: ev.clientY - marginTop
+          x: ev.clientX - marginLeft,
+          y: ev.clientY - marginTop,
         };
         this.moveY = obj.y;
         this.moveX = obj.x;
@@ -192,6 +195,7 @@ export default {
     touchMove(ev) {
       let dom = this.$refs.canvasF;
       let marginTop = dom.getBoundingClientRect().top;
+      let marginLeft = dom.getBoundingClientRect().left || 0;
 
       ev = ev || event;
       if (ev.cancelable) {
@@ -200,8 +204,8 @@ export default {
 
       if (ev.touches.length == 1) {
         let obj = {
-          x: ev.targetTouches[0].clientX,
-          y: ev.targetTouches[0].clientY - marginTop
+          x: ev.targetTouches[0].clientX - marginLeft,
+          y: ev.targetTouches[0].clientY - marginTop,
         };
         this.moveY = obj.y;
         this.moveX = obj.x;
@@ -219,6 +223,7 @@ export default {
     mouseUp(ev) {
       let dom = this.$refs.canvasF;
       let marginTop = dom.getBoundingClientRect().top;
+      let marginLeft = dom.getBoundingClientRect().left || 0;
 
       ev = ev || event;
       if (ev.cancelable) {
@@ -226,8 +231,8 @@ export default {
       }
 
       let obj = {
-        x: ev.clientX,
-        y: ev.clientY - marginTop
+        x: ev.clientX - marginLeft,
+        y: ev.clientY - marginTop,
       };
       this.canvasTxt.beginPath();
       this.canvasTxt.moveTo(this.startX, this.startY);
@@ -242,6 +247,7 @@ export default {
     touchEnd(ev) {
       let dom = this.$refs.canvasF;
       let marginTop = dom.getBoundingClientRect().top;
+      let marginLeft = dom.getBoundingClientRect().left || 0;
 
       ev = ev || event;
       if (ev.cancelable) {
@@ -250,8 +256,8 @@ export default {
       // console.log(ev);
       if (ev.touches.length == 1) {
         let obj = {
-          x: ev.targetTouches[0].clientX,
-          y: ev.targetTouches[0].clientY - marginTop
+          x: ev.targetTouches[0].clientX - marginLeft,
+          y: ev.targetTouches[0].clientY - marginTop,
         };
         this.canvasTxt.beginPath();
         this.canvasTxt.moveTo(this.startX, this.startY);
