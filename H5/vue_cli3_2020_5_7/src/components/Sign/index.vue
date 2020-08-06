@@ -280,6 +280,7 @@ div {
   width: 100%;
   position: relative;
   height: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   background: #ffffff;
