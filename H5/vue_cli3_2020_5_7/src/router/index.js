@@ -49,7 +49,7 @@ const routes = [
     meta: {
       isWhiteList: true, //是否白名单 默认false
     },
-    component: () => import( /* webpackChunkName: "ErrorModule" */ '../views/Error/404.vue')
+    component: () => import( /* webpackChunkName: "errorModule" */ '../views/Error/404.vue')
   },
   {
     path: '*',

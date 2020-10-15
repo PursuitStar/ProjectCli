@@ -1,3 +1,8 @@
+/**
+ * Desc: 工具函数
+ */
+
+
 /* --- 设备环境判断 --- */
 
 // 是否微信环境
@@ -193,13 +198,28 @@ export const copyToClipboard = (text) => {
 }
 
 
+// 请求路径过滤
+export const urlHandle = (BaseUrl, url) => {
+    let resultUrl = '';
+    if (typeof BaseUrl == 'string' && typeof url == 'string') {
+        if (BaseUrl.charAt(BaseUrl.length - 1) == '/') {
+            BaseUrl = BaseUrl.substring(0, BaseUrl.length - 1)
+        }
+        if (url.charAt(0) == '/') {
+            url = url.substring(1, url.length)
+        }
+        resultUrl = BaseUrl + '/' + url;
+    }
+    return resultUrl
+}
+
 
 /* --- 业务相关 --- */
 
 // 是否第三方进入
 export const hasOrigin = () => {
     let origin = window.sessionStorage.getItem('origin');
-    if (origin === 'ios' || origin === 'android' || origin === 'wechat') {
+    if (['ios', 'android', 'wechat'].includes(origin)) {
         return true
     } else {
         return false

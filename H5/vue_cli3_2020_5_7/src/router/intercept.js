@@ -1,3 +1,6 @@
+/**
+ * Desc: 路由拦截
+ */
 import router from './index';
 import {
     getToken

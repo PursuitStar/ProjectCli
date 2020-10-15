@@ -4,6 +4,8 @@
       class="content"
       :style="{ backgroundImage: `url(${backgroundImage})` }"
     >
+      <div @click="changeLangs">{{ $t("login.changeLangBtn") }}</div>
+
       <footer class="footer">
         <button class="button" @click.stop="linkToPage('/')">
           我要成为经销商
@@ -23,19 +25,18 @@ export default {
   name: "Login",
   data() {
     return {
-      backgroundImage: ""
+      backgroundImage: "",
     };
   },
   mounted() {
     // this.backgroundImage =
     //   "https://yshu.oss-cn-shanghai.aliyuncs.com/uploads/bg_banner/594990b9-d549-4972-81e0-b740216e5968.png";
     this.queryBg();
-    this.queryBg();
   },
   methods: {
     // 获取背景图
     queryBg() {
-      this.$Api.postForm({ url: "/regPageBanner/get" }).then(res => {
+      this.$Api.HomeApi.getBg().then((res) => {
         this.backgroundImage = res.data;
       });
     },
@@ -44,10 +45,20 @@ export default {
     linkToPage(path, query) {
       this.$router.push({
         path,
-        query
+        query,
       });
-    }
-  }
+    },
+
+    // 切换语言
+    changeLangs() {
+      let lang = this.$i18n.locale;
+      if (lang == "zh") {
+        this.$i18n.locale = "en";
+      } else {
+        this.$i18n.locale = "zh";
+      }
+    },
+  },
 };
 </script>
 

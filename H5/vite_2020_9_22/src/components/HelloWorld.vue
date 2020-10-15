@@ -1,9 +1,9 @@
 <template>
   <div>当前用户信息</div>
   <div>=======================================</div>
-  <div>用户信息-账户：{{ $user_info.account }}</div>
-  <div>用户信息-昵称：{{ $user_info.name }}</div>
-  <div>用户信息-年龄：{{ $user_info.age }}</div>
+  <div>用户信息-账户：{{ user_info.account }}</div>
+  <div>用户信息-昵称：{{ user_info.name }}</div>
+  <div>用户信息-年龄：{{ user_info.age }}</div>
 
   <div>=======================================</div>
   <div>
@@ -23,19 +23,19 @@ export default {
   props: ["objParams", "numParams"],
   setup(props) {
     console.log(props);
-    const $user_info = inject("$user_info");
+    const user_info = inject("$user_info");
     const $Api = inject("$Api");
 
     $Api.CommonApi.login({
-      url: "/login",
+      name: user_info.name,
     });
 
     const addUserAge = () => {
-      $user_info.age++;
+      user_info.age++;
     };
 
     return {
-      $user_info,
+      user_info,
       addUserAge,
     };
   },

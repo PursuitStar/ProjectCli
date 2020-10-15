@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Api from '@/plugins/axios'
 
 Vue.use(Vuex)
 
@@ -29,7 +28,7 @@ const actions = {
   async queryUserInfo({
     commit
   }) {
-    const res = await Api.get('/user/get_user_info', {});
+    const res = await Vue.$Api.CommonApi.getUserInfo('/user/get_user_info', {});
     if (res.code === 0) {
       sessionStorage.setItem('user', JSON.stringify(res.data))
       commit('updateUserInfo');

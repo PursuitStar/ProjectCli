@@ -5,9 +5,7 @@
 import axios from "axios";
 
 import qs from 'qs';
-import {
-    baseUrlArr
-} from '../config/index';
+import PATH from '../config/index';
 import {
     getToken
 } from '../utils/auth';
@@ -39,10 +37,12 @@ _axios.interceptors.request.use(
         // Do something before request is sent
         let token = getToken();
         config.headers['token'] = token;
-
+        console.log(config)
 
         // 防重复提交: 原理：在请求还未返回内容时取消再次发起的请求
         delRepeatHttpRequest(requestMap, config, qs, CancelToken);
+
+
 
         return config;
     },
@@ -55,7 +55,7 @@ _axios.interceptors.request.use(
 // 响应拦截
 _axios.interceptors.response.use(
     function (response) {
-        // 请求成功后重置requestMap
+        // 重置请求requestMap
         requestMap.set(response.config._keyString, false);
 
         // Do something with response data
@@ -74,7 +74,7 @@ const http = {
     get: ({
         url = '',
         params = {},
-        baseUrIndex = 0,
+        pathAttr = 'baseURL',
         axiosConfig = {}
     }) => {
         let config = {
@@ -83,7 +83,7 @@ const http = {
             params,
             ...axiosConfig
         };
-        config.baseURL = baseUrlArr[baseUrIndex];
+        config.baseURL = PATH[pathAttr];
         return _axios(config)
 
     },
@@ -91,8 +91,8 @@ const http = {
     // post - application/x-www-form-urlencoded
     postForm: ({
         url = '',
-        data = {},
-        baseUrIndex = 0,
+        params: data = {},
+        pathAttr = 'baseURL',
         axiosConfig = {}
     }) => {
         let config = {
@@ -104,15 +104,15 @@ const http = {
             },
             ...axiosConfig
         };
-        config.baseURL = baseUrlArr[baseUrIndex];
+        config.baseURL = PATH[pathAttr];
         return _axios(config)
     },
 
     // post - application/json
     postJson: ({
         url = '',
-        data = {},
-        baseUrIndex = 0,
+        params: data = {},
+        pathAttr = 'baseURL',
         axiosConfig = {}
     }) => {
         let config = {
@@ -124,15 +124,15 @@ const http = {
             },
             ...axiosConfig
         };
-        config.baseURL = baseUrlArr[baseUrIndex];
+        config.baseURL = PATH[pathAttr];
         return _axios(config)
     },
 
     // post - multipart/form-data
     postUpload: ({
         url = '',
-        data = new FormData(),
-        baseUrIndex = 0,
+        params: data = new FormData(),
+        pathAttr = 'baseURL',
         axiosConfig = {}
     }) => {
         // data = new FormData();
@@ -147,15 +147,15 @@ const http = {
             },
             ...axiosConfig
         };
-        config.baseURL = baseUrlArr[baseUrIndex];
+        config.baseURL = PATH[pathAttr];
         return _axios(config)
     },
 
     // post - download
     postDownload: ({
         url = '',
-        data = {},
-        baseUrIndex = 0,
+        params: data = {},
+        pathAttr = 'baseURL',
         axiosConfig = {}
     }) => {
         let config = {
@@ -165,7 +165,7 @@ const http = {
             responseType: 'blob',
             ...axiosConfig
         };
-        config.baseURL = baseUrlArr[baseUrIndex];
+        config.baseURL = PATH[pathAttr];
         return _axios(config)
     },
 

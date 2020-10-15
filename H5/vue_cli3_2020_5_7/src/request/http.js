@@ -1,11 +1,11 @@
-"use strict";
+/**
+ * Desc: 请求封装
+ */
 
 import axios from "axios";
 
 import qs from 'qs';
-import {
-  baseUrlArr
-} from '@/config/index';
+import PATH from '@/config/index';
 import {
   getToken
 } from '@/utils/auth';
@@ -72,7 +72,7 @@ const Api = {
   get: ({
     url = '',
     params = {},
-    baseUrIndex = 0,
+    pathAttr = 'baseURL',
     axiosConfig = {}
   }) => {
     let config = {
@@ -81,7 +81,7 @@ const Api = {
       params,
       ...axiosConfig
     };
-    config.baseURL = baseUrlArr[baseUrIndex];
+    config.baseURL = PATH[pathAttr];
     return _axios(config)
 
   },
@@ -89,8 +89,8 @@ const Api = {
   // post - application/x-www-form-urlencoded
   postForm: ({
     url = '',
-    data = {},
-    baseUrIndex = 0,
+    params: data = {},
+    pathAttr = 'baseURL',
     axiosConfig = {}
   }) => {
     let config = {
@@ -102,15 +102,15 @@ const Api = {
       },
       ...axiosConfig
     };
-    config.baseURL = baseUrlArr[baseUrIndex];
+    config.baseURL = PATH[pathAttr];
     return _axios(config)
   },
 
   // post - application/json
   postJson: ({
     url = '',
-    data = {},
-    baseUrIndex = 0,
+    params: data = {},
+    pathAttr = 'baseURL',
     axiosConfig = {}
   }) => {
     let config = {
@@ -122,15 +122,15 @@ const Api = {
       },
       ...axiosConfig
     };
-    config.baseURL = baseUrlArr[baseUrIndex];
+    config.baseURL = PATH[pathAttr];
     return _axios(config)
   },
 
   // post - multipart/form-data
   postUpload: ({
     url = '',
-    data = new FormData(),
-    baseUrIndex = 0,
+    params: data = new FormData(),
+    pathAttr = 'baseURL',
     axiosConfig = {}
   }) => {
     // data = new FormData();
@@ -145,15 +145,15 @@ const Api = {
       },
       ...axiosConfig
     };
-    config.baseURL = baseUrlArr[baseUrIndex];
+    config.baseURL = PATH[pathAttr];
     return _axios(config)
   },
 
   // post - download
   postDownload: ({
     url = '',
-    data = {},
-    baseUrIndex = 0,
+    params: data = {},
+    pathAttr = 'baseURL',
     axiosConfig = {}
   }) => {
     let config = {
@@ -163,7 +163,7 @@ const Api = {
       responseType: 'blob',
       ...axiosConfig
     };
-    config.baseURL = baseUrlArr[baseUrIndex];
+    config.baseURL = PATH[pathAttr];
     return _axios(config)
   },
 

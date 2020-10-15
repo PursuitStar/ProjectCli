@@ -74,7 +74,7 @@ import {
   copyToClipboard,
   blobToFile,
   resizeImage,
-  isImage
+  isImage,
 } from "@/utils/tool";
 
 export default {
@@ -82,7 +82,7 @@ export default {
   components: {
     Modal,
     Sign,
-    Code
+    Code,
   },
   data() {
     return {
@@ -95,7 +95,7 @@ export default {
 
       text: "", //粘贴板复制的内容
 
-      file: undefined //当前上传的文件
+      file: undefined, //当前上传的文件
     };
   },
   mounted() {},
@@ -143,16 +143,10 @@ export default {
     /* --- 接口示例 --- */
     // 下载excel
     downloadExcel() {
-      let data = {};
-      this.$Api
-        .postDownload({
-          url: "/commision/exportAgentCommMonth",
-          data,
-          baseUrIndex: 2
-        })
-        .then(res => {
-          blobToFile(res, "测试文件.xlsx");
-        });
+      let params = {};
+      this.$Api.CommonApi.download(params).then((res) => {
+        blobToFile(res, "测试文件.xlsx");
+      });
     },
 
     // 上传文件 - 动作
@@ -168,7 +162,7 @@ export default {
       }
 
       // 压缩图片
-      resizeImage(file).then(res => {
+      resizeImage(file).then((res) => {
         console.log("resizeFile:", res);
         this.file = res;
       });
@@ -183,16 +177,15 @@ export default {
       let data = new FormData();
       data.append("file", this.file);
       data.append("fileType", "single_img");
-      this.$Api
-        .postUpload({ url: "/upload/files", data, baseUrIndex: 2 })
-        .then(res => {
-          console.log(res);
 
-          // 上传完毕后 清空input文件列表
-          document.querySelector("#fileInput").value = "";
-        });
-    }
-  }
+      this.$Api.CommonApi.upload(data).then((res) => {
+        console.log(res);
+
+        // 上传完毕后 清空input文件列表
+        document.querySelector("#fileInput").value = "";
+      });
+    },
+  },
 };
 </script>
 

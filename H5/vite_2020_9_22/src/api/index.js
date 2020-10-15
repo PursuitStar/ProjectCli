@@ -13,9 +13,9 @@ import {
 const Api = {
     CommonApi: {
         // 登录接口
-        login: (config) => http.postForm({
-            ...config,
-            url: urlHandle(STORE_GATEWAY, config.url)
+        login: (params) => http.postForm({
+            url: urlHandle(STORE_GATEWAY, '/login'),
+            params,
         })
     }
 }
