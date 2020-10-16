@@ -1,8 +1,34 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home/index.vue'
+import Home from '@/views/Home/index.vue'
 
 Vue.use(VueRouter)
+
+
+let routerList = [];
+
+// 引入模块
+let importAllModule = (requireContext) => {
+  let moduleKeys = requireContext.keys();
+  moduleKeys.forEach(ele => {
+    let pathName = ele.substring(2);
+    let moduleItem = require(`./module/${pathName}`).default;
+
+    // 自定义处理
+    routerList.push(moduleItem);
+  });
+};
+
+try {
+  importAllModule(require.context('./module', true, /\.js$/));
+} catch (error) {
+  console.log(error);
+}
+
+routerList = routerList.flat();
+console.log(routerList)
+
+
 
 const routes = [
   // 首页模块 - 首页
@@ -21,36 +47,11 @@ const routes = [
     meta: {
       isWhiteList: true, //是否白名单 默认false
     },
-    component: () => import( /* webpackChunkName: "demo" */ '../views/demo.vue')
+    component: () => import( /* webpackChunkName: "demo" */ '@/views/demo.vue')
   },
 
-  // 登录模块 - 登录
-  {
-    path: '/login',
-    name: 'Login',
-    meta: {
-      isWhiteList: true, //是否白名单 默认false
-    },
-    component: () => import( /* webpackChunkName: "loginModule" */ '../views/Login/login.vue')
-  },
-  // 登录模块 - 注册
-  {
-    path: '/register',
-    name: 'Register',
-    meta: {
-      isWhiteList: true, //是否白名单 默认false
-    },
-    component: () => import( /* webpackChunkName: "loginModule" */ '../views/Login/register.vue')
-  },
-  // Error模块
-  {
-    path: '/404',
-    name: '404',
-    meta: {
-      isWhiteList: true, //是否白名单 默认false
-    },
-    component: () => import( /* webpackChunkName: "errorModule" */ '../views/Error/404.vue')
-  },
+  ...routerList,
+
   {
     path: '*',
     redirect: '/404',

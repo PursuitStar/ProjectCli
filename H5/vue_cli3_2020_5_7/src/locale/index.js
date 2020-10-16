@@ -1,3 +1,7 @@
+/**
+ * Desc: 国际化
+ */
+
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 
@@ -5,18 +9,20 @@ Vue.use(VueI18n)
 
 const langs = {};
 
-// 引入所有语言
-let importAllLangs = (requireContext) => {
-    let langsKeys = requireContext.keys();
-    langsKeys.forEach(ele => {
+// 引入模块
+let importAllModule = (requireContext) => {
+    let moduleKeys = requireContext.keys();
+    moduleKeys.forEach(ele => {
         let pathName = ele.substring(2);
         let moduleItem = require(`./lang/${pathName}`).default;
+
+        // 自定义处理
         langs[moduleItem.tag] = moduleItem.data;
     });
 };
 
 try {
-    importAllLangs(require.context('./lang', true, /\.js$/));
+    importAllModule(require.context('./lang', true, /\.js$/));
 } catch (error) {
     console.log(error);
 }

@@ -14,7 +14,7 @@ export default {
       routerPathList: [], //已访问路由列表
       transitionClass: "",
 
-      appHeight: ""
+      appHeight: "",
     };
   },
   watch: {
@@ -35,7 +35,7 @@ export default {
         this.transitionClass = "slide-in";
       }
       this.routerPathList = routerPathList;
-    }
+    },
   },
   mounted() {
     this.appHeight = window.innerHeight;
@@ -46,14 +46,14 @@ export default {
     // 禁止滚动事件
     document.body.addEventListener(
       "touchmove",
-      function(evt) {
+      function (evt) {
         if (!evt._isScroller) {
           evt.preventDefault();
         }
       },
       { passive: false }
     );
-  }
+  },
 };
 </script>
 
