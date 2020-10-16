@@ -1,3 +1,5 @@
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+
 module.exports = {
     lintOnSave: true,
     css: {
@@ -13,4 +15,28 @@ module.exports = {
             }
         }
     },
+    configureWebpack: (config) => {
+        // 生产环境配置
+        if (process.env.NODE_ENV === 'production') {
+            config.devtool = false;
+
+            config.plugins = [
+                ...config.plugins,
+
+                // gzip
+                new CompressionWebpackPlugin({
+                    test: /\.(js|css|html|png|svg)$/,
+                    threshold: 10240,
+                    deleteOriginalAssets: false
+                })
+            ];
+
+            // 关闭webpack性能提示
+            config.performance = {
+                hints: false
+            }
+        } else {
+            config.devtool = 'inline-source-map';
+        }
+    }
 }
