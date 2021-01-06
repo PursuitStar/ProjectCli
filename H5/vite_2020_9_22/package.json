@@ -6,7 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "fastclick": "^1.0.6",
     "qs": "^6.9.4",
     "vue": "^3.0.0-rc.1",
